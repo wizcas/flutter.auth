@@ -27,7 +27,9 @@ class _WelcomePageState extends State<WelcomePage> {
           RaisedButton(
             child: Text('Sign up now!'),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'reg-email');
+            },
           ),
         ],
       ),

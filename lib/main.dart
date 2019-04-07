@@ -1,4 +1,5 @@
 import 'package:auth_demo/pages/login.dart';
+import 'package:auth_demo/pages/reg.email.dart';
 import 'package:auth_demo/pages/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         },
         'login': (BuildContext context) {
           return LoginPage();
+        },
+        'reg-email': (BuildContext context){
+          return RegEmailPage();
         }
       },
       initialRoute: 'welcome',

@@ -11,6 +11,7 @@ class FullScreenBg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
+          padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           image: DecorationImage(
         image: AssetImage(bgImg == null ? DefaultBg : bgImg),

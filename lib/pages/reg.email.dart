@@ -3,34 +3,23 @@ import 'package:auth_demo/prefabs/intro/fullbg.dart';
 import 'package:auth_demo/prefabs/intro/logo.home.dart';
 import 'package:flutter/material.dart';
 
-class _LoginData {
-  String email;
-  String password;
+class RegEmailPage extends StatefulWidget {
+  final Widget child;
+
+  RegEmailPage({Key key, this.child}) : super(key: key);
+
+  _RegEmailPageState createState() => _RegEmailPageState();
 }
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
-
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class _RegEmailPageState extends State<RegEmailPage> {
   final formKey = GlobalKey<FormState>();
-  FocusNode passwordFocus;
-  _LoginData _data;
+  String _regEmail;
   bool _isProcessing;
 
   void initState() {
     super.initState();
-    passwordFocus = FocusNode();
-    _data = _LoginData();
     _isProcessing = false;
-  }
-
-  @override
-  void dispose() {
-    passwordFocus.dispose();
-    super.dispose();
+    _regEmail = '';
   }
 
   void _submit() {
@@ -40,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     formKey.currentState.save();
     setState(() {
       _isProcessing = true;
-      print('Logging in with ${_data.email}:${_data.password}');
+      print('Register email is sent to $_regEmail');
     });
   }
 
@@ -58,19 +47,15 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 HomeLogo(),
                 EmailFormField(
-                  onFieldSubmitted: (String email) {
-                    FocusScope.of(context).requestFocus(passwordFocus);
-                  },
                   onSaved: (String email) {
-                    _data.email = email;
+                    this._regEmail = email;
                   },
                 ),
-                _buildPasswordField(),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: RaisedButton(
                     child: !_isProcessing
-                        ? Text('Sign In')
+                        ? Text('Sign Up')
                         : SizedBox(
                             width: 20,
                             height: 20,
@@ -85,29 +70,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  Widget _buildPasswordField() {
-    return TextFormField(
-      focusNode: passwordFocus,
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.done,
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password',
-        icon: Icon(
-          Icons.lock,
-        ),
-      ),
-      validator: (String pwd) {
-        if (pwd.isEmpty) {
-          return 'Password is required.';
-        }
-      },
-      onSaved: (String pwd) {
-        _data.password = pwd;
-      },
-    );
-  }
-
-  TextStyle get _fieldTextStyle => TextStyle(color: Colors.black);
 }
