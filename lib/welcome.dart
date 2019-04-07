@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key}) : super(key: key);
@@ -24,7 +25,11 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  child: Image.asset('assets/images/Quali.svg'),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: SvgPicture.asset(
+                    'assets/images/Quali.svg',
+                    color: Colors.white,
+                  ),
                 ),
                 RaisedButton(
                   child: Text('Sign in'),
