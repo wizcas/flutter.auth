@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // primarySwatch: Colors.grey,
         primarySwatch: qualiColor,
+        accentColor: Colors.white,
+        buttonTheme: ButtonThemeData(buttonColor: Colors.black, textTheme: ButtonTextTheme.accent),
+        // textTheme: TextTheme(button: TextStyle(fontSize: 40)),
       ),
       routes: {
         'welcome': (BuildContext context) {

@@ -19,14 +19,12 @@ class _WelcomePageState extends State<WelcomePage> {
           HomeLogo(),
           RaisedButton(
             child: Text('Sign in'),
-            color: Colors.white,
             onPressed: () {
               Navigator.pushNamed(context, 'login');
             },
           ),
           RaisedButton(
             child: Text('Sign up now!'),
-            color: Colors.white,
             onPressed: () {
               Navigator.pushNamed(context, 'reg-email');
             },
