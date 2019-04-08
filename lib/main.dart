@@ -1,5 +1,7 @@
 import 'package:auth_demo/pages/login.dart';
+import 'package:auth_demo/pages/reg.create.dart';
 import 'package:auth_demo/pages/reg.email.dart';
+import 'package:auth_demo/pages/reg.verify.dart';
 import 'package:auth_demo/pages/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.grey,
         primarySwatch: qualiColor,
         accentColor: Colors.white,
-        buttonTheme: ButtonThemeData(buttonColor: Colors.black, textTheme: ButtonTextTheme.accent),
+        buttonTheme: ButtonThemeData(
+            buttonColor: Colors.black, textTheme: ButtonTextTheme.accent),
         // textTheme: TextTheme(button: TextStyle(fontSize: 40)),
       ),
       routes: {
@@ -45,9 +48,11 @@ class MyApp extends StatelessWidget {
         'login': (BuildContext context) {
           return LoginPage();
         },
-        'reg-email': (BuildContext context){
+        'reg-email': (BuildContext context) {
           return RegEmailPage();
-        }
+        },
+        'reg-verify': (BuildContext context) => RegVerifyPage(),
+        'reg-create': (BuildContext context) => RegCreatePage(),
       },
       initialRoute: 'welcome',
     );

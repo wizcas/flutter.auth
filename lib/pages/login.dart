@@ -47,16 +47,18 @@ class _LoginPageState extends State<LoginPage> {
         await _authSvc.login(_data.email, _data.password).catchError((err) {
       print('login error: $err');
     });
-    print(jwt == null ? '(NOT AUTHORIZED)' : jwt);
-    setState(() {
-      _isProcessing = false;
-    });
+    if (mounted) {
+      print(jwt == null ? '(NOT AUTHORIZED)' : jwt);
+      setState(() {
+        _isProcessing = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: FullScreenBg(
+    return Scaffold(
+      body: FullScreenBg(
         child: Container(
           width: 300,
           child: Form(
