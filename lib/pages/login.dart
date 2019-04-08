@@ -1,6 +1,7 @@
 import 'package:auth_demo/prefabs/intro/email.field.dart';
 import 'package:auth_demo/prefabs/intro/fullbg.dart';
 import 'package:auth_demo/prefabs/intro/logo.home.dart';
+import 'package:auth_demo/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class _LoginData {
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
+  final _authSvc = AuthService();
   FocusNode passwordFocus;
   _LoginData _data;
   bool _isProcessing;
@@ -33,14 +35,21 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _submit() {
+  void _submit() async {
     if (!formKey.currentState.validate()) {
       return;
     }
-    formKey.currentState.save();
     setState(() {
       _isProcessing = true;
-      print('Logging in with ${_data.email}:${_data.password}');
+    });
+    formKey.currentState.save();
+    final jwt =
+        await _authSvc.login(_data.email, _data.password).catchError((err) {
+      print('login error: $err');
+    });
+    print(jwt == null ? '(NOT AUTHORIZED)' : jwt);
+    setState(() {
+      _isProcessing = false;
     });
   }
 
@@ -108,6 +117,4 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
-  TextStyle get _fieldTextStyle => TextStyle(color: Colors.black);
 }
